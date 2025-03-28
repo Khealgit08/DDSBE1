@@ -12,7 +12,7 @@ use DB;
 
 class User1Controller extends Controller {
 
-    /*use ApiResponser;
+    use ApiResponser;
 
     private $request;
 
@@ -31,7 +31,7 @@ class User1Controller extends Controller {
     * Return the list of users
     * @return Illuminate\Http\Response
     */
-    /*
+    
     public function index()
     {
         $users = User::all();
@@ -53,7 +53,7 @@ class User1Controller extends Controller {
     * Obtains and show one user
     * @return Illuminate\Http\Response
     */
-    /*
+    
     public function show($id){
         $user = User::findOrFail($id);
         return $this->successResponse($user);
@@ -71,7 +71,7 @@ class User1Controller extends Controller {
     * Update an existing author
     * @return Illuminate\Http\Response
     */
-    /*
+    
     public function update(Request $request,$id){
         $rules = [
             'username' => 'max:20',
@@ -109,7 +109,7 @@ class User1Controller extends Controller {
     * Remove an existing user
     * @return Illuminate\Http\Response
     */
-    /*
+    
     public function delete($id){
         $user = User::findOrFail($id);
         $user->delete();
@@ -123,5 +123,5 @@ class User1Controller extends Controller {
         {
             return $this->errorResponse('User ID Does Not Exists', Response::HTTP_NOT_FOUND);
         }
-    }*/
+    }
 }
