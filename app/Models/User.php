@@ -18,11 +18,9 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var string[]
      */
-
-    protected $table = 'tblusers';
-    protected $primaryKey = 'id';
+    protected $table = 'users';
     protected $fillable = [
-        'username', 'password', 'gender', 'jobid'
+        'id','username', 'password', 'gender'
     ];
 
     /**
@@ -30,18 +28,7 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var string[]
      */
-    
-    
     protected $hidden = [
         'password',
     ];
-
-    /**
-     * Define relationship with UserJob model.
-     * A user belongs to a job.
-     */
-    public function job()
-    {
-        return $this->belongsTo(UserJob::class, 'jobid', 'id');
-    }
 }

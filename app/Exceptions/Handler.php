@@ -85,11 +85,6 @@ class Handler extends ExceptionHandler{
     if (env('APP_DEBUG', false)) {
         return parent::render($request, $exception);
     }
-    if ($exception instanceof ClientException) {
-        $message = $exception->getResponse()->getBody();
-        $code = $exception->getCode();
-        return $this->errorMessage($message,200);
-    }
         return $this->errorResponse('Unexpected error. Try later',Response::HTTP_INTERNAL_SERVER_ERROR);
     }
 }
