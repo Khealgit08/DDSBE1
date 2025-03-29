@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Laravel\Lumen\Auth\Authorizable;
 
-class User extends Model implements AuthenticatableContract, AuthorizableContract
+class UserJob1 extends Model implements AuthenticatableContract, AuthorizableContract
 {
     use Authenticatable, Authorizable, HasFactory;
 
@@ -19,29 +19,24 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      * @var string[]
      */
 
-    protected $table = 'tblusers';
-    protected $primaryKey = 'id';
+    protected $table = 'tbluserjobs';  // Table name
+    protected $primaryKey = 'id';      // Primary key
+
     protected $fillable = [
-        'username', 'password', 'gender', 'jobid'
+        'jobname'
     ];
 
     /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var string[]
+     * Disable timestamps if not needed.
      */
-    
-    
-    protected $hidden = [
-        'password',
-    ];
+    public $timestamps = false;
 
     /**
-     * Define relationship with UserJob model.
-     * A user belongs to a job.
+     * Define relationship with User model.
+     * A job can have multiple users.
      */
-    public function job()
+    public function users()
     {
-        return $this->belongsTo(UserJob::class, 'jobid', 'id');
+        return $this->hasMany(User::class, 'jobid', 'id');
     }
 }

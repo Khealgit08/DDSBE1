@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\UserJob1;
 use Illuminate\Http\Request;
 use App\Traits\ApiResponser;
 use Illuminate\Http\Response;
@@ -43,8 +44,11 @@ class User1Controller extends Controller {
             'username' => 'required|max:20',
             'password' => 'required|max:20',
             'gender' => 'required|in:Male,Female',
+            'jobid' => 'required|numeric|min:1|not_in:0',
         ];
         $this->validate($request,$rules);
+        // validate if Jobid is found inthe table tbluserjob
+        $userjob = UserJob1::findOrFail($request->jobid);
         $user = User::create($request->all());
         return $this->successResponse($user,Response::HTTP_CREATED);
     }
@@ -58,7 +62,7 @@ class User1Controller extends Controller {
         $user = User::findOrFail($id);
         return $this->successResponse($user);
         // old code
-        $user = User::where('userid', $id)->first();
+        $user = User::where('id', $id)->first();
         if($user){
             return $this->successResponse($user);
         }
@@ -77,8 +81,10 @@ class User1Controller extends Controller {
             'username' => 'max:20',
             'password' => 'max:20',
             'gender' => 'in:Male,Female',
+            'jobid' => 'required|numeric|min:1|not_in:0',
         ];
         $this->validate($request, $rules);
+        $userjob = UserJob1::findOrFail($request->jobid);
         $user = User::findOrFail($id);
         $user->fill($request->all());
         // if no changes happen
@@ -87,10 +93,11 @@ class User1Controller extends Controller {
         }
         $user->save();
         return $this->successResponse($user);
+        
         // old code
         $this->validate($request, $rules);
         //$user = User::findOrFail($id);
-        $user = User::where('userid', $id)->first();
+        $user = User::where('id', $id)->first();
         if($user){
             $user->fill($request->all());
             // if no changes happen
@@ -115,7 +122,7 @@ class User1Controller extends Controller {
         $user->delete();
         return $this->successResponse($user);
         // old code
-        $user = User::where('userid', $id)->first();
+        $user = User::where('id', $id)->first();
         if($user){
             $user->delete();
             return $this->successResponse($user);
