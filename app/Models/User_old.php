@@ -18,14 +18,10 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
      *
      * @var string[]
      */
-    protected $table = 'tblusers';
+    protected $table = 'users';
     protected $fillable = [
-        'username', 'password', 'gender', 'jobid'
+        'username', 'password', 'gender'
     ];
-
-    public $timestamps = false;
-
-    protected $primaryKey = 'id';
 
     /**
      * The attributes excluded from the model's JSON form.
